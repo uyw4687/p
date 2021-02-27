@@ -1,0 +1,5 @@
+SELECT orderInfo.buyer_id, orderInfo.buy_date, library.book_name, library.price
+FROM orderInfo
+JOIN library ON orderInfo.book_id = library.book_id
+WHERE (book_name='Looking with Elice') OR (buy_date BETWEEN '2020-07-27' AND '2020-07-31')
+ORDER BY buy_date ASC;

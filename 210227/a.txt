@@ -1,0 +1,23 @@
+def main():
+    n = int(input())
+    vs = []
+    for _ in range(n*n):
+        v = list(map(int,input().split()))
+        vs.append(v)
+    
+    vs.sort(key=(lambda x:x[0]))
+    go = {}
+
+    for v in vs:
+        p = v[0]
+        for x in v[2:]:
+            go[x] = p
+
+    total = 0
+    for x in go.values():
+        total += x
+                
+    print(total)
+    
+if __name__=="__main__":
+    main()

@@ -1,0 +1,21 @@
+def go(bps,curr):
+    cnt = 0
+    visited = [False]*len(bps)
+    while not visited[curr]:
+        visited[curr] = True
+        cnt += 1
+        curr = bps[curr]+curr
+    cnt += 1
+    return cnt
+
+def main():
+    n = int(input())
+    bps = [0]+list(map(int,input().split()))
+    mv = -1
+    mv = max(mv,go(bps,1))
+    mv = max(mv,go(bps,2))
+    mv = max(mv,go(bps,3))
+    print(mv)
+
+if __name__=="__main__":
+    main()

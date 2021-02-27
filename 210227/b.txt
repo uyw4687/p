@@ -1,0 +1,30 @@
+def main():
+    n,m,e = map(int,input().split())
+    # map
+    ma = list(map(int,input().split()))
+
+    pos = 0
+    for i in range(len(ma)):
+        pos = i
+        if e>ma[i]:
+            continue
+        break
+    lefts = min(pos,m)
+
+    # min value
+    mv = (ma[-1]-ma[0])+max(abs(ma[0]-e),abs(ma[-1]-e))
+    for i in range(lefts+1):
+        left = ma[lefts-i]
+        right = ma[lefts-i+(m-1)]
+        
+        # current value
+        cv = right-left
+        if e>right:
+            cv += (e-right)
+        elif e<left:
+            cv += (left-e)
+        mv = min(mv,cv)
+    print(mv)
+        
+if __name__=="__main__":
+    main()

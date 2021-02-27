@@ -1,0 +1,48 @@
+# curr val
+# curr index
+# curr depth
+# max depth
+def fa(maxs,cv,ci,cd,md,rs,part):
+    if cd == md:
+        rs.append(cv+maxs[cd][ci])
+    else:
+        # new value
+        nv = cv+maxs[cd][ci]
+        if part=='l':
+            fa(maxs,nv,2*(ci+1),cd+1,md,rs,'l')
+            fa(maxs,nv,2*(ci+1)+1,cd+1,md,rs,'r')
+        else:
+            fa(maxs,nv,2*(ci-1),cd+1,md,rs,'l')
+            fa(maxs,nv,2*(ci-1)+1,cd+1,md,rs,'r')
+            
+def main():
+    n = int(input())
+    # profits
+    ps = list(map(int,input().split()))
+
+    curr = n
+    maxs = []
+    # previous max
+    pmax = ps
+    while curr != 2:
+        curr //= 2
+        # current max
+        cmax = []
+        for i in range(curr):
+            cmax.append(max(pmax[2*i],pmax[2*i+1]))
+
+        pmax = cmax
+        maxs.append(cmax)
+
+    maxs = list(reversed(maxs))
+    maxs.append(ps)
+
+    # find all
+    rs = []
+    md = len(maxs)-1
+    fa(maxs,0,0,0,md,rs,'l')
+    fa(maxs,0,1,0,md,rs,'r')
+    print(max(rs))
+
+if __name__=="__main__":
+    main()
