@@ -1,0 +1,19 @@
+def processLogs(logs, maxSpan):
+    us = {}
+    for x in logs:
+        a,b,_ = x.split()
+        a,b = map(int,[a,b])
+        if a in us:
+            us[a].append(b)
+        else:
+            us[a]=[b]
+            
+    rs = []
+    for x,y in us.items():
+        if len(y)!=2:
+            continue
+        y,z = y
+        if abs(y-z)<=maxSpan:
+            rs.append(x)
+    
+    return list(map(str,sorted(rs)))

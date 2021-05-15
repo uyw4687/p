@@ -1,0 +1,40 @@
+def inter(left, right, n):
+    li,lv = left
+    ri,rv = right
+    
+    val = (ri-n)*lv+(n-li)*rv
+    val /= (ri-li)
+    
+    return '{:0.2f}'.format(val)
+
+def interpolate(n, instances, price):
+    left = right = None
+    leftleft = None; rightright = None
+    for i,p in zip(instances,price):
+        if p<=0:
+            continue
+        
+        if right is not None:
+            rightright=(i,p)
+            break
+
+        if n==i:
+            return str(p)
+        if n<i:
+            right=(i,p)
+            continue
+        
+        leftleft = left; left = (i,p)
+
+    if left is not None and right is not None:
+        return inter(left,right,n)
+    if left is None:
+        if rightright is None:
+            return '{:0.2f}'.format(right[1])
+        else:
+            return inter(right,rightright,n)
+    if right is None:
+        if leftleft is None:
+            return '{:0.2f}'.format(left[1])
+        else:
+            return inter(left,leftleft,n)

@@ -1,0 +1,7 @@
+def arrayChallenge(arr):
+    cr = []
+    s = 0
+    for i,x in enumerate(arr):
+        cr.append(x*i-s)
+        s+=x
+    return cr
